@@ -51,9 +51,13 @@ func Run() {
 		},
 	}, l)
 
+	if err != nil {
+		l.Fatal(err.Error())
+	}
+
 	l.Debug("Connected to PostgreSQL")
 
-	//postgres.DeferClose(db, l)
+	defer postgres.DeferClose(db, l)
 
 	val := govalidator.New()
 	h := hasher.NewHasher()
